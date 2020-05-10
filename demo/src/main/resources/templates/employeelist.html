@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+
+
+
+<div class="container">
+	<h1 class="mb-5">Employee list</h1>
+		<form class="form-inline" th:action="@{addEmp}" method="POST" th:object="${employee}">
+		  <div class="form-group mb-2">
+		  	<input type="hidden" class="form-control" th:field="*{id}">
+		    <input type="text" class="form-control" id="staticEmail2" placeholder="Enter Firstname" th:field="*{firstName}">
+		  </div>
+		  <div class="form-group mx-sm-3 mb-2">
+		    <input type="text" class="form-control" id="inputPassword2" placeholder="Enter Lastname" th:field="*{lastName}">
+		  </div>
+		  <div class="form-group mx-sm-3 mb-2">
+		    <label for="inputPassword2" class="sr-only">Company</label>
+		    <input type="text" class="form-control" id="inputPassword2" placeholder="Enter Company" th:field="*{company}">
+		  </div>
+		  <button type="submit" class="btn btn-primary mb-2">Add</button>
+		</form>
+	<div class="row">
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">First</th>
+		      <th scope="col">Last</th>
+		      <th scope="col">Company</th>
+		      <th scope="col">Action</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="emp : ${employees}">
+		      <th scope="row" th:text="${emp.id}"/>
+		      <td th:text="${emp.firstName}"/>
+		      <td th:text="${emp.lastName}"/>
+		      <td th:text="${emp.company}"/>
+		      <td>
+		      	<a th:href="@{updateEmp(empid=${emp.id})}" class="btn btn-primary btn-sm">Update</a>
+		      	<a th:href="@{deleteEmp(empid=${emp.id})}" class="btn btn-danger btn-sm">Delete</a>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
+</div>
+
+</body>
+</html>
